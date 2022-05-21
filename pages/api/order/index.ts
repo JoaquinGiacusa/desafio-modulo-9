@@ -39,20 +39,11 @@ async function postHandler(req: NextApiRequest, res: NextApiResponse, token) {
   }
 }
 
-// async function getHandler(req: NextApiRequest, res: NextApiResponse, token) {
-//   res.send("llegue");
-// }
-// const getHandlerWithValidation = querySchemaMiddleware(bodySchema, () => {
-//   console.log("hola");
-// });
-
-//handler para discriminar metodos
 const handler = methods({
-  // get: getHandler,
   post: postHandler,
 });
 
-//esta el la funcion final que es exporta
+//esta el la funcion final que se exporta
 export default querySchemaMiddleware(
   querySchema,
   bodySchemaMiddleware(bodySchema, authMiddleware(handler))

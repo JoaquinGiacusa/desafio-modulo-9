@@ -1,9 +1,5 @@
 import { firestore } from "lib/firestore";
 
-type OrderData = {
-  status: "pending" | "payed";
-};
-
 const collection = firestore.collection("orders");
 export class Order {
   ref: FirebaseFirestore.DocumentData;
@@ -29,7 +25,7 @@ export class Order {
     return newUser;
   }
 
-  static async getAllOrdersByUserId(userId) {
+  static async getAllOrdersByUserId(userId: string) {
     const ordersByUserId = await collection.where("userId", "==", userId).get();
     if (ordersByUserId.empty) {
       return [];

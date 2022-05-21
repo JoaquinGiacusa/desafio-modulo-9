@@ -1,6 +1,4 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { generate } from "lib/jwt";
-import { Auth } from "models/auth";
 import { signIn } from "controllers/auth";
 import * as yup from "yup";
 import { bodySchemaMiddleware } from "lib/middlewares";

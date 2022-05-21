@@ -57,7 +57,6 @@ export async function getMyOrders(userId) {
 export async function getOrderById(orderId) {
   const order = new Order(orderId);
   await order.pull();
-  console.log(order.data);
 
   if (!order.data) {
     throw "la order solicitada no existe";
@@ -101,10 +100,8 @@ export async function payNotification(id, topic) {
 
       const user = new User(myOrder.data.userId);
       await user.pull();
-      console.log(user.data);
 
       const email = user.data.email;
-      console.log({ email });
 
       const sendEmail = await sendPayNotificationEmail(email);
       //sendEmailInterno("Alguien compró algo")
