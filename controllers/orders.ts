@@ -21,30 +21,33 @@ export async function createOrderAndSendUrlByMail(
     userId: userId,
     status: "pending",
   });
-
-  const product = (await productsIndex.getObject(productId)) as any;
-  if (product) {
-    const pref = await createPreference({
-      items: [
-        {
-          title: product.Name,
-          category_id: "car_electronics",
-          quantity: 1,
-          currency_id: "ARS",
-          unit_price: product["Unit cost"],
+  try {
+    const product = (await productsIndex.getObject(productId)) as any;
+    if (product) {
+      const pref = await createPreference({
+        items: [
+          {
+            title: product.Name,
+            category_id: "car_electronics",
+            quantity: 1,
+            currency_id: "ARS",
+            unit_price: product["Unit cost"],
+          },
+        ],
+        back_urls: {
+          success: "https://apx.school",
+          pending: "https://apx.school/pending-payments",
         },
-      ],
-      back_urls: {
-        success: "https://apx.school",
-        pending: "https://apx.school/pending-payments",
-      },
-      external_reference: order.id,
-      //esta url que pertenece a mi endopoint se ejecuta cuando se paga o intenta pagar
-      notification_url:
-        "https://desafio-modulo-9.vercel.app/api/webhooks/mercadopago",
-    });
+        external_reference: order.id,
+        //esta url que pertenece a mi endopoint se ejecuta cuando se paga o intenta pagar
+        notification_url:
+          "https://desafio-modulo-9.vercel.app/api/webhooks/mercadopago",
+      });
 
-    return { url: pref.init_point, orderId: order.id };
+      return { url: pref.init_point, orderId: order.id };
+    }
+  } catch (e) {
+    return { message: "el producto no existe" } as any;
   }
 }
 
