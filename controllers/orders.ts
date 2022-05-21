@@ -69,9 +69,9 @@ async function sendPayNotificationEmail(to: string) {
   const msg = {
     to: to,
     from: "joaquingiacusa.dev@gmail.com", // Use the email address or domain you verified above
-    subject: "Codigo de ingreso",
-    text: "code...",
-    html: "<strong>Tu pago se realizo con exito</strong>",
+    subject: "Pago exitoso!!!",
+    text: "Pago correcto",
+    html: "<strong>Tu pago se realizo con exito, graciassss!</strong>",
   };
 
   try {
@@ -94,19 +94,23 @@ export async function payNotification(id, topic) {
       const orderId = order.external_reference;
       const myOrder = new Order(orderId);
       await myOrder.pull();
+
       myOrder.data.status = "closed";
       myOrder.data.externalOrder = order;
       await myOrder.push();
 
       const user = new User(myOrder.data.userId);
+      await user.pull();
+      console.log(user.data);
+
       const email = user.data.email;
       console.log({ email });
 
-      sendPayNotificationEmail(email);
+      const sendEmail = await sendPayNotificationEmail(email);
       //sendEmailInterno("Alguien compró algo")
-      return "pago exitoso";
+      return { status: "paid", sendEmail: sendEmail.message };
     } else {
-      throw "error";
+      return "no esta pago aún";
     }
   }
 }
