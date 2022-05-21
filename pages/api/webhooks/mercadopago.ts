@@ -9,7 +9,9 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
 
   try {
     const result = await payNotification(id, topic);
-    res.send;
+    console.log("RESULTS", result);
+
+    res.send(result);
   } catch (error) {
     res.status(404).send({ message: error });
   }

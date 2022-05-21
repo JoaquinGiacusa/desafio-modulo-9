@@ -95,11 +95,13 @@ export async function payNotification(id, topic) {
       const myOrder = new Order(orderId);
       await myOrder.pull();
       myOrder.data.status = "closed";
-      myOrder.data.externalORder = order;
+      myOrder.data.externalOrder = order;
       await myOrder.push();
 
       const user = new User(myOrder.data.userId);
       const email = user.data.email;
+      console.log({ email });
+
       sendPayNotificationEmail(email);
       //sendEmailInterno("Alguien compró algo")
       return "pago exitoso";
