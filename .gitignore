@@ -1,0 +1,7 @@
+.vercel
+.next
+node_modules
+yarn.lock
+.env.local
+.vscode
+next-env.d.ts

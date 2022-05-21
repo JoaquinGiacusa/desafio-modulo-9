@@ -1,0 +1,48 @@
+{
+  "name": "desafio-modulo-9",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:JoaquinGiacusa/desafio-modulo-9.git",
+  "author": "JoaquinGiacusa <joaquingiacusa.dev@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next",
+    "test": "ava"
+  },
+  "ava": {
+    "nodeArguments": [
+      "--loader=esbuild-node-loader",
+      "--experimental-specifier-resolution=node"
+    ],
+    "environmentVariables": {
+      "TESTING": "true",
+      "JWT_SECRET": "secretoTest123123"
+    },
+    "extensions": {
+      "ts": "module"
+    }
+  },
+  "dependencies": {
+    "@sendgrid/mail": "^7.7.0",
+    "airtable": "^0.11.4",
+    "algoliasearch": "^4.13.1",
+    "ava": "^4.2.0",
+    "date-fns": "^2.28.0",
+    "esbuild-node-loader": "^0.8.0",
+    "firebase-admin": "^10.2.0",
+    "jsonwebtoken": "^8.5.1",
+    "mercadopago": "^1.5.13",
+    "micro-method-router": "^0.1.0",
+    "next": "^12.1.6",
+    "parse-bearer-token": "^1.0.1",
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0",
+    "unique-random": "^3.0.0",
+    "yup": "^0.32.11"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.9"
+  }
+}
