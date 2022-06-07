@@ -3,7 +3,7 @@ import parseBearerToken from "parse-bearer-token";
 import { decode } from "lib/jwt";
 
 export function authMiddleware(callback) {
-  return function middleware(req: NextApiRequest, res: NextApiResponse) {
+  return function (req: NextApiRequest, res: NextApiResponse) {
     const token = parseBearerToken(req);
     if (!token) {
       res.status(401).send({ message: "no hay token" });
@@ -55,25 +55,4 @@ export function querySchemaMiddleware(schemaYup, callback) {
       res.status(400).send({ field: "query", message: error });
     }
   };
-}
-
-////////////////////////////////////////////////////
-import type { NextRequest } from "next/server";
-
-export function middleware(req: NextRequest) {
-  if (req.method == "OPTIONS") {
-    return new Response("", {
-      status: 204,
-      headers: {
-        "Access-Control-Allow-Credentials": "true",
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "GET,OPTIONS,PATCH,DELETE,POST,PUT",
-        "Access-Control-Allow-Headers": req.headers.get(
-          "Access-Control-Request-Headers"
-        ),
-        Vary: "Access-Control-Request-Headers",
-        "Content-Length": "0",
-      },
-    });
-  }
 }
