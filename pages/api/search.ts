@@ -4,11 +4,11 @@ import { searchProducts } from "controllers/product";
 
 export default methods({
   async get(req: NextApiRequest, res: NextApiResponse) {
-    const { search, limit, offset } = req.query;
+    const { q, limit, offset } = req.query;
 
     try {
       //si el string de search esta vacio devuelte todo
-      const results = await searchProducts(limit, offset, search as string);
+      const results = await searchProducts(limit, offset, q as string);
       //respuesta ya filtada con lo que necesito
       res.send(results);
     } catch (e) {
