@@ -35,7 +35,7 @@
     "jsonwebtoken": "^8.5.1",
     "mercadopago": "^1.5.13",
     "micro-method-router": "^0.1.0",
-    "next": "^12.1.6",
+    "next": "^12.2.0",
     "parse-bearer-token": "^1.0.1",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
