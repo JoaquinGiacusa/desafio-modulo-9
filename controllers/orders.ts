@@ -36,6 +36,7 @@ export async function createOrderAndSendUrlByMail(
         ],
         back_urls: {
           success: "https://e-commerce-mod10.vercel.app/",
+          pending: "https://apx.school",
         },
         external_reference: order.id,
         //esta url que pertenece a mi endopoint se ejecuta cuando se paga o intenta pagar
