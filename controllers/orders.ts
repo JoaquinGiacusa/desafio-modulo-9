@@ -35,7 +35,7 @@ export async function createOrderAndSendUrlByMail(
           },
         ],
         back_urls: {
-          success: "https://e-commerce-mod10.vercel.app/",
+          success: "https://e-commerce-mod10.vercel.app/thanks",
           pending: "https://apx.school",
         },
         external_reference: order.id,
